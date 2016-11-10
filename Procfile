@@ -1,1 +1,1 @@
-web: fsharpc-heroku DBoard.sln
+web: fsharpc-heroku DBoard.exe
