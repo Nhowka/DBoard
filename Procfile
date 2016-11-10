@@ -1,1 +1,1 @@
-web: mono DBoard.exe
+web: sh find
