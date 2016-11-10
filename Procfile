@@ -1,1 +1,1 @@
-web: fsharpc-heroku DBoard.exe
+web: mono DBoard.exe
