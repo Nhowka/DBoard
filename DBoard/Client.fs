@@ -17,10 +17,12 @@ module Client =
                 | None -> async { return "" }
                 | Some input -> Server.DoSomething input
             )
+        
         div [
+            script [text "var ws = new WebSocket(document.URL.replace('http','ws')+'ws'); ws.onmessage=function(msg){CoolBox.innerHTML=msg.data;};"]
             Doc.Input [] rvInput
             Doc.Button "Send" [] submit.Trigger
             hr []
             h4Attr [attr.``class`` "text-muted"] [text "The server responded:"]
-            divAttr [attr.``class`` "jumbotron"] [h1 [textView vReversed]]
+            divAttr [attr.``class`` "jumbotron"] [h1Attr [Attr.Create "id" "CoolBox"] [textView vReversed]]
         ]
