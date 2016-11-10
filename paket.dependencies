@@ -1,0 +1,12 @@
+source https://www.nuget.org/api/v2/
+framework >= net45
+
+nuget FSharp.Core 3.1.2.5
+nuget Microsoft.Owin 3.0.1
+nuget Mono.Cecil 0.9.6.4
+nuget Owin 1.0
+nuget Suave 1.1.3
+nuget WebSharper 3.6.18.241
+nuget WebSharper.Owin 3.6.13.132
+nuget WebSharper.Suave 3.6.13.40
+nuget WebSharper.UI.Next 3.6.15.211
