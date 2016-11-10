@@ -1,1 +1,1 @@
-web: sh find
+web: mono *.exe
