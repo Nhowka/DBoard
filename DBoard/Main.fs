@@ -15,7 +15,7 @@ module SocketCommunication =
     open Suave.Http
     
     let pushServer (webSocket : WebSocket) = 
-        fun (cx:HttpContext) -> 
+        fun (cx : HttpContext) -> 
             socket { 
                 let loop = ref true
                 while !loop do
@@ -72,9 +72,21 @@ module Site =
     open Suave.Filters
     open Suave.WebSocket
     open Suave.Operators
+    open Suave.Http
+    open System.Net
+    open Suave.Logging
     
     let endpoints = 
         choose [ path "/ws" >=> handShake SocketCommunication.pushServer
                  (WebSharperAdapter.ToWebPart Main) ]
     
-    do startWebServer defaultConfig endpoints
+    let config = 
+        let port = System.Environment.GetEnvironmentVariable("PORT")
+        let ip127 = IPAddress.Parse("127.0.0.1")
+        let ipZero = IPAddress.Parse("0.0.0.0")
+        { defaultConfig with logger = Loggers.saneDefaultsFor LogLevel.Verbose
+                             bindings = 
+                                 [ (if port = null then HttpBinding.mk HTTP ip127 (uint16 8083)
+                                    else HttpBinding.mk HTTP ipZero (uint16 port)) ] }
+    
+    do startWebServer config endpoints
