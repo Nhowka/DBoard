@@ -1,1 +1,1 @@
-web: fsharpi-heroku DBoard.sln
+web: fsharpc-heroku DBoard.sln
