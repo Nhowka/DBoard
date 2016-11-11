@@ -1012,52 +1012,52 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2' Or $(TargetFrameworkVersion) == 'v4.6.3')">
       <ItemGroup>
         <Reference Include="WebSharper.Collections">
-          <HintPath>..\packages\Zafir\lib\net40\WebSharper.Collections.dll</HintPath>
+          <HintPath>..\packages\WebSharper\lib\net40\WebSharper.Collections.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
         <Reference Include="WebSharper.Control">
-          <HintPath>..\packages\Zafir\lib\net40\WebSharper.Control.dll</HintPath>
+          <HintPath>..\packages\WebSharper\lib\net40\WebSharper.Control.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
         <Reference Include="WebSharper.Core.JavaScript">
-          <HintPath>..\packages\Zafir\lib\net40\WebSharper.Core.JavaScript.dll</HintPath>
+          <HintPath>..\packages\WebSharper\lib\net40\WebSharper.Core.JavaScript.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
         <Reference Include="WebSharper.Core">
-          <HintPath>..\packages\Zafir\lib\net40\WebSharper.Core.dll</HintPath>
+          <HintPath>..\packages\WebSharper\lib\net40\WebSharper.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
         <Reference Include="WebSharper.InterfaceGenerator">
-          <HintPath>..\packages\Zafir\lib\net40\WebSharper.InterfaceGenerator.dll</HintPath>
+          <HintPath>..\packages\WebSharper\lib\net40\WebSharper.InterfaceGenerator.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
         <Reference Include="WebSharper.JQuery">
-          <HintPath>..\packages\Zafir\lib\net40\WebSharper.JQuery.dll</HintPath>
+          <HintPath>..\packages\WebSharper\lib\net40\WebSharper.JQuery.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
         <Reference Include="WebSharper.JavaScript">
-          <HintPath>..\packages\Zafir\lib\net40\WebSharper.JavaScript.dll</HintPath>
+          <HintPath>..\packages\WebSharper\lib\net40\WebSharper.JavaScript.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
         <Reference Include="WebSharper.Main">
-          <HintPath>..\packages\Zafir\lib\net40\WebSharper.Main.dll</HintPath>
+          <HintPath>..\packages\WebSharper\lib\net40\WebSharper.Main.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
         <Reference Include="WebSharper.Sitelets">
-          <HintPath>..\packages\Zafir\lib\net40\WebSharper.Sitelets.dll</HintPath>
+          <HintPath>..\packages\WebSharper\lib\net40\WebSharper.Sitelets.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
         <Reference Include="WebSharper.Web">
-          <HintPath>..\packages\Zafir\lib\net40\WebSharper.Web.dll</HintPath>
+          <HintPath>..\packages\WebSharper\lib\net40\WebSharper.Web.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -1068,12 +1068,12 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2' Or $(TargetFrameworkVersion) == 'v4.6.3')">
       <ItemGroup>
         <Reference Include="HttpMultipartParser">
-          <HintPath>..\packages\Zafir.Owin\lib\net45\HttpMultipartParser.dll</HintPath>
+          <HintPath>..\packages\WebSharper.Owin\lib\net45\HttpMultipartParser.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
         <Reference Include="WebSharper.Owin">
-          <HintPath>..\packages\Zafir.Owin\lib\net45\WebSharper.Owin.dll</HintPath>
+          <HintPath>..\packages\WebSharper.Owin\lib\net45\WebSharper.Owin.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -1084,7 +1084,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2' Or $(TargetFrameworkVersion) == 'v4.6.3')">
       <ItemGroup>
         <Reference Include="WebSharper.Suave">
-          <HintPath>..\packages\Zafir.Suave\lib\net45\WebSharper.Suave.dll</HintPath>
+          <HintPath>..\packages\WebSharper.Suave\lib\net45\WebSharper.Suave.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -1094,24 +1094,18 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2' Or $(TargetFrameworkVersion) == 'v4.6.3')">
       <ItemGroup>
-        <Reference Include="WebSharper.UI.Next.CSharp">
-          <HintPath>..\packages\Zafir.UI.Next\lib\net40\WebSharper.UI.Next.CSharp.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
         <Reference Include="WebSharper.UI.Next.Templating">
-          <HintPath>..\packages\Zafir.UI.Next\lib\net40\WebSharper.UI.Next.Templating.dll</HintPath>
+          <HintPath>..\packages\WebSharper.UI.Next\lib\net40\WebSharper.UI.Next.Templating.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
         <Reference Include="WebSharper.UI.Next">
-          <HintPath>..\packages\Zafir.UI.Next\lib\net40\WebSharper.UI.Next.dll</HintPath>
+          <HintPath>..\packages\WebSharper.UI.Next\lib\net40\WebSharper.UI.Next.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
       </ItemGroup>
     </When>
   </Choose>
-  <Import Project="..\packages\Zafir.FSharp\build\Zafir.FSharp.targets" Condition="Exists('..\packages\Zafir.FSharp\build\Zafir.FSharp.targets')" Label="Paket" />
-  <Import Project="..\packages\Zafir.UI.Next\build\Zafir.UI.Next.targets" Condition="Exists('..\packages\Zafir.UI.Next\build\Zafir.UI.Next.targets')" Label="Paket" />
+  <Import Project="..\packages\WebSharper\build\WebSharper.targets" Condition="Exists('..\packages\WebSharper\build\WebSharper.targets')" Label="Paket" />
 </Project>

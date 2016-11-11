@@ -1,6 +1,5 @@
 source https://api.nuget.org/v3/index.json
 
-nuget Zafir.FSharp prerelease
-nuget Zafir.Suave prerelease
-nuget Zafir.UI.Next prerelease
+nuget WebSharper.Suave prerelease
+nuget WebSharper.UI.Next prerelease
 nuget Suave prerelease
