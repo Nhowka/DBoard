@@ -30,7 +30,7 @@
     <Name>DBoard</Name>
     <RootNamespace>DBoard</RootNamespace>
     <AssemblyName>DBoard</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
