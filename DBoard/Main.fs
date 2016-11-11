@@ -27,10 +27,10 @@ module SocketCommunication =
                         do! webSocket.send Text (Array.concat [ "Websocket: " |> System.Text.Encoding.Default.GetBytes
                                                                 cx.connection.socketBinding.ip.GetAddressBytes()
                                                                 data ]
-                                                 |> System.ArraySegment) true
-                    | (Ping, _, _) -> do! webSocket.send Pong (System.ArraySegment [||]) true
+                                                 ) true
+                    | (Ping, _, _) -> do! webSocket.send Pong ( [||]) true
                     | (Close, _, _) ->
-                        do! webSocket.send Close (ArraySegment [||]) true
+                        do! webSocket.send Close ( [||]) true
                         loop := false
                     | _ -> ()
             }
@@ -88,7 +88,7 @@ module Site =
         let ip127 = IPAddress.Parse("127.0.0.1")
         let ipZero = IPAddress.Parse("0.0.0.0")
         { defaultConfig with bindings =
-                                 [ (if port = null then HttpBinding.create HTTP ip127 (uint16 8083)
-                                    else HttpBinding.create HTTP ipZero (uint16 port)) ] }
+                                 [ (if port = null then HttpBinding.mk HTTP ip127 (uint16 8083)
+                                    else HttpBinding.mk HTTP ipZero (uint16 port)) ] }
 
     do startWebServer config endpoints
