@@ -11,8 +11,10 @@ type EndPoint =
 
 module SocketCommunication =
     open Suave.WebSocket
+    open Suave.Sockets
     open Suave.Sockets.Control
     open Suave.Http
+    open System
 
     let pushServer (webSocket : WebSocket) =
         fun (cx : HttpContext) ->
@@ -24,10 +26,11 @@ module SocketCommunication =
                     | (Text, data, true) ->
                         do! webSocket.send Text (Array.concat [ "Websocket: " |> System.Text.Encoding.Default.GetBytes
                                                                 cx.connection.socketBinding.ip.GetAddressBytes()
-                                                                data ]) true
-                    | (Ping, _, _) -> do! webSocket.send Pong [||] true
+                                                                data ]
+                                                 |> System.ArraySegment) true
+                    | (Ping, _, _) -> do! webSocket.send Pong (System.ArraySegment [||]) true
                     | (Close, _, _) ->
-                        do! webSocket.send Close [||] true
+                        do! webSocket.send Close (ArraySegment [||]) true
                         loop := false
                     | _ -> ()
             }
@@ -84,9 +87,8 @@ module Site =
         let port = System.Environment.GetEnvironmentVariable("PORT")
         let ip127 = IPAddress.Parse("127.0.0.1")
         let ipZero = IPAddress.Parse("0.0.0.0")
-        { defaultConfig with logger = Loggers.saneDefaultsFor LogLevel.Verbose
-                             bindings =
-                                 [ (if port = null then HttpBinding.mk HTTP ip127 (uint16 8083)
-                                    else HttpBinding.mk HTTP ipZero (uint16 port)) ] }
+        { defaultConfig with bindings =
+                                 [ (if port = null then HttpBinding.create HTTP ip127 (uint16 8083)
+                                    else HttpBinding.create HTTP ipZero (uint16 port)) ] }
 
     do startWebServer config endpoints
