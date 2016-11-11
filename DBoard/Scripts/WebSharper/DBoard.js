@@ -1,58 +1,35 @@
 (function()
 {
- var Global=this,Runtime=this.IntelliFactory.Runtime,UI,Next,Var,Submitter1,Remoting,AjaxRemotingProvider,Concurrency,View,List,Doc,T,AttrProxy;
- Runtime.Define(Global,{
-  DBoard:{
-   Client:{
-    Main:function()
-    {
-     var rvInput,submit,arg00,arg10,vReversed,arg20,arg201,arg202,arg203;
-     rvInput=Var.Create("");
-     submit=Submitter1.CreateOption(rvInput.get_View());
-     arg00=function(_arg1)
-     {
-      return _arg1.$==1?AjaxRemotingProvider.Async("DBoard:0",[_arg1.$0]):Concurrency.Delay(function()
-      {
-       return Concurrency.Return("");
-      });
-     };
-     arg10=submit.get_View();
-     vReversed=View.MapAsync(arg00,arg10);
-     arg201=List.ofArray([Doc.TextNode("var ws = new WebSocket(document.URL.replace('http','ws')+'ws'); ws.onmessage=function(msg){CoolBox.innerHTML=msg.data;};")]);
-     arg202=function()
-     {
-      return submit.Trigger();
-     };
-     arg203=Runtime.New(T,{
-      $:0
-     });
-     arg20=List.ofArray([Doc.Element("script",[],arg201),Doc.Input(Runtime.New(T,{
-      $:0
-     }),rvInput),Doc.Button("Send",Runtime.New(T,{
-      $:0
-     }),arg202),Doc.Element("hr",[],arg203),Doc.Element("h4",List.ofArray([AttrProxy.Create("class","text-muted")]),List.ofArray([Doc.TextNode("The server responded:")])),Doc.Element("div",List.ofArray([AttrProxy.Create("class","jumbotron")]),List.ofArray([Doc.Element("h1",List.ofArray([AttrProxy.Create("id","CoolBox")]),List.ofArray([Doc.TextView(vReversed)]))]))]);
-     return Doc.Element("div",[],arg20);
-    }
-   }
-  }
- });
- Runtime.OnInit(function()
+ var Global=this;
+ var DBoard=Global.DBoard=Global.DBoard||{};
+ var Client=DBoard.Client=DBoard.Client||{};
+ var WebSharper=Global.WebSharper;
+ var UI=WebSharper&&WebSharper.UI;
+ var Next=UI&&UI.Next;
+ var Var=Next&&Next.Var;
+ var Submitter=Next&&Next.Submitter;
+ var View=Next&&Next.View;
+ var Remoting=WebSharper&&WebSharper.Remoting;
+ var AjaxRemotingProvider=Remoting&&Remoting.AjaxRemotingProvider;
+ var Concurrency=WebSharper&&WebSharper.Concurrency;
+ var Doc=Next&&Next.Doc;
+ var AttrProxy=Next&&Next.AttrProxy;
+ Client.Main=function()
  {
-  UI=Runtime.Safe(Global.WebSharper.UI);
-  Next=Runtime.Safe(UI.Next);
-  Var=Runtime.Safe(Next.Var);
-  Submitter1=Runtime.Safe(Next.Submitter1);
-  Remoting=Runtime.Safe(Global.WebSharper.Remoting);
-  AjaxRemotingProvider=Runtime.Safe(Remoting.AjaxRemotingProvider);
-  Concurrency=Runtime.Safe(Global.WebSharper.Concurrency);
-  View=Runtime.Safe(Next.View);
-  List=Runtime.Safe(Global.WebSharper.List);
-  Doc=Runtime.Safe(Next.Doc);
-  T=Runtime.Safe(List.T);
-  return AttrProxy=Runtime.Safe(Next.AttrProxy);
- });
- Runtime.OnLoad(function()
- {
-  return;
- });
+  var rvInput,submit,vReversed,ch,ch$1,ats,ch$2,ats$1,ch$3,ats$2,ch$4;
+  rvInput=Var.Create$1("");
+  submit=Submitter.CreateOption(rvInput.get_View());
+  vReversed=View.MapAsync(function($1)
+  {
+   return($1!=null?$1.$==1:false)?(new AjaxRemotingProvider.New()).Async("DBoard:DBoard.Server.DoSomething:-1287498065",[$1.$0]):Concurrency.Delay(function()
+   {
+    return Concurrency.Return("");
+   });
+  },submit.view);
+  ch=[(ch$1=[Doc.TextNode("var ws = new WebSocket(document.URL.replace('http','ws')+'ws'); ws.onmessage=function(msg){CoolBox.innerHTML=msg.data;};")],Doc.Element("script",[],ch$1)),Doc.Input([],rvInput),Doc.Button("Send",[],function()
+  {
+   submit.Trigger();
+  }),Doc.Element("hr",[],[]),(ats=[AttrProxy.Create("class","text-muted")],ch$2=[Doc.TextNode("The server responded:")],Doc.Element("h4",ats,ch$2)),(ats$1=[AttrProxy.Create("class","jumbotron")],ch$3=[(ats$2=[AttrProxy.Create("id","CoolBox")],ch$4=[Doc.TextView(vReversed)],Doc.Element("h1",ats$2,ch$4))],Doc.Element("div",ats$1,ch$3))];
+  return Doc.Element("div",[],ch);
+ };
 }());

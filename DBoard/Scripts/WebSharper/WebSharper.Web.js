@@ -1,501 +1,320 @@
 (function()
 {
- var Global=this,Runtime=this.IntelliFactory.Runtime,Json,Provider,Date,List,Arrays,Unchecked,Operators,Collections,FSharpSet,BalancedTree,Dictionary,JavaScript,JSModule,FSharpMap,Seq,Enumerator,MapModule,Internals,window;
- Runtime.Define(Global,{
-  WebSharper:{
-   Json:{
-    Internals:{
-     Provider:Runtime.Field(function()
+ var Global=this;
+ var WebSharper=Global.WebSharper=Global.WebSharper||{};
+ var Json=WebSharper.Json=WebSharper.Json||{};
+ var Provider=Json.Provider=Json.Provider||{};
+ var Web=WebSharper.Web=WebSharper.Web||{};
+ var Control=Web.Control=Web.Control||{};
+ var FSharpInlineControl=Web.FSharpInlineControl=Web.FSharpInlineControl||{};
+ var InlineControl=Web.InlineControl=Web.InlineControl||{};
+ var IntelliFactory=Global.IntelliFactory;
+ var Runtime=IntelliFactory&&IntelliFactory.Runtime;
+ var Collections=WebSharper&&WebSharper.Collections;
+ var Dictionary=Collections&&Collections.Dictionary;
+ var JavaScript=WebSharper&&WebSharper.JavaScript;
+ var JSModule=JavaScript&&JavaScript.JSModule;
+ var FSharpMap=Collections&&Collections.FSharpMap;
+ var Unchecked=WebSharper&&WebSharper.Unchecked;
+ var Arrays=WebSharper&&WebSharper.Arrays;
+ var Operators=WebSharper&&WebSharper.Operators;
+ var FSharpSet=Collections&&Collections.FSharpSet;
+ var BalancedTree=Collections&&Collections.BalancedTree;
+ var List=WebSharper&&WebSharper.List;
+ var Enumerator=WebSharper&&WebSharper.Enumerator;
+ var Map=Collections&&Collections.Map;
+ var Seq=WebSharper&&WebSharper.Seq;
+ Provider.DecodeStringDictionary=function(decEl)
+ {
+  return Runtime.Curried2(function(unitVar0,o)
+  {
+   var d;
+   d=new Dictionary.New$5();
+   JSModule.ForEach(o,function(k)
+   {
+    d.set_Item(k,o[k]);
+    return false;
+   });
+   return d;
+  });
+ };
+ Provider.DecodeStringMap=function(decEl)
+ {
+  return Runtime.Curried2(function(unitVar0,o)
+  {
+   var m;
+   m=[new FSharpMap.New([])];
+   JSModule.ForEach(o,function(k)
+   {
+    m[0]=m[0].Add(k,o[k]);
+    return false;
+   });
+   return m[0];
+  });
+ };
+ Provider.DecodeArray=function(decEl)
+ {
+  return Provider.EncodeArray(decEl);
+ };
+ Provider.DecodeUnion=function(t,discr,cases)
+ {
+  return Runtime.Curried2(function(unitVar0,x)
+  {
+   var o,tag,tagName,predicate,r,x$1,action;
+   return(typeof x==="object"?x!=null:false)?(o=t===void 0?{}:new t(),tag=Unchecked.Equals(typeof discr,"string")?(tagName=x[discr],(predicate=function(a)
+   {
+    return a[0]===tagName;
+   },function(array)
+   {
+    return Arrays.findINdex(predicate,array);
+   })(cases)):(r=[void 0],JSModule.ForEach(discr,function(k)
+   {
+    return x.hasOwnProperty(k)?(r[0]=discr[k],true):false;
+   }),r[0]),o.$=tag,x$1=(Arrays.get(cases,tag))[1],(action=function(a)
+   {
+    var from,to,dec,kind;
+    from=a[0];
+    to=a[1];
+    dec=a[2];
+    kind=a[3];
+    from===null?void(o.$0=(dec(null))(x)):Unchecked.Equals(kind,0)?void(o[from]=(dec(null))(x[to])):Unchecked.Equals(kind,1)?void(o[from]=x.hasOwnProperty(to)?{
+     $:1,
+     $0:(dec(null))(x[to])
+    }:null):Operators.FailWith("Invalid field option kind");
+   },function(array)
+   {
+    Arrays.iter(action,array);
+   })(x$1),o):x;
+  });
+ };
+ Provider.DecodeRecord=function(t,fields)
+ {
+  return Runtime.Curried2(function(unitVar0,x)
+  {
+   var o,action;
+   o=t===void 0?{}:new t();
+   (action=function(a)
+   {
+    var name,dec,kind;
+    name=a[0];
+    dec=a[1];
+    kind=a[2];
+    Unchecked.Equals(kind,0)?x.hasOwnProperty(name)?void(o[name]=(dec(null))(x[name])):Operators.FailWith("Missing mandatory field: "+name):Unchecked.Equals(kind,1)?void(o[name]=x.hasOwnProperty(name)?{
+     $:1,
+     $0:(dec(null))(x[name])
+    }:null):Unchecked.Equals(kind,2)?x.hasOwnProperty(name)?void(o[name]=(dec(null))(x[name])):null:Operators.FailWith("Invalid field option kind");
+   },function(array)
+   {
+    Arrays.iter(action,array);
+   })(fields);
+   return o;
+  });
+ };
+ Provider.DecodeSet=function(decEl)
+ {
+  return Runtime.Curried2(function(unitVar0,a)
+  {
+   var e;
+   e=decEl();
+   return new FSharpSet.New$1(BalancedTree.OfSeq(Arrays.map(e,a)));
+  });
+ };
+ Provider.DecodeList=function(decEl)
+ {
+  return Runtime.Curried2(function(unitVar0,a)
+  {
+   var e;
+   e=decEl();
+   return List.init(Arrays.length(a),function(i)
+   {
+    return e(Arrays.get(a,i));
+   });
+  });
+ };
+ Provider.DecodeDateTime=function()
+ {
+  return Runtime.Curried2(function(unitVar0,x)
+  {
+   return(new Global.Date(x)).getTime();
+  });
+ };
+ Provider.DecodeTuple=function(decs)
+ {
+  return Provider.EncodeTuple(decs);
+ };
+ Provider.EncodeStringDictionary=function(encEl)
+ {
+  return Runtime.Curried2(function(unitVar0,d)
+  {
+   var o={};
+   var e=encEl();
+   var enumerator=Enumerator.Get(d);
+   try
+   {
+    while(enumerator.MoveNext())
      {
-      return Provider.New();
-     })
-    },
-    Provider:Runtime.Class({
-     DecodeArray:function(decEl)
-     {
-      return this.EncodeArray(decEl);
-     },
-     DecodeDateTime:function()
-     {
-      return function()
-      {
-       return function(x)
-       {
-        return(new Date(x)).getTime();
-       };
-      };
-     },
-     DecodeList:function(decEl)
-     {
-      return function()
-      {
-       return function(a)
-       {
-        var decEl1;
-        decEl1=decEl(null);
-        return List.init(Arrays.length(a),function(i)
-        {
-         return decEl1(Arrays.get(a,i));
-        });
-       };
-      };
-     },
-     DecodeRecord:function(t,fields)
-     {
-      return function()
-      {
-       return function(x)
-       {
-        var o,action;
-        o=t===undefined?{}:new t();
-        action=function(tupledArg)
-        {
-         var name,dec,kind;
-         name=tupledArg[0];
-         dec=tupledArg[1];
-         kind=tupledArg[2];
-         return Unchecked.Equals(kind,0)?void(o[name]=(dec(null))(x[name])):Unchecked.Equals(kind,1)?void(o[name]=x.hasOwnProperty(name)?{
-          $:1,
-          $0:(dec(null))(x[name])
-         }:{
-          $:0
-         }):Unchecked.Equals(kind,2)?x.hasOwnProperty(name)?void(o[name]=(dec(null))(x[name])):null:Operators.FailWith("Invalid field option kind");
-        };
-        Arrays.iter(action,fields);
-        return o;
-       };
-      };
-     },
-     DecodeSet:function(decEl)
-     {
-      return function()
-      {
-       return function(a)
-       {
-        var decEl1;
-        decEl1=decEl(null);
-        return FSharpSet.New1(BalancedTree.OfSeq(Arrays.map(decEl1,a)));
-       };
-      };
-     },
-     DecodeStringDictionary:function(decEl)
-     {
-      return function()
-      {
-       return function(o)
-       {
-        var d;
-        d=Dictionary.New12();
-        decEl(null);
-        JSModule.ForEach(o,function(k)
-        {
-         d.set_Item(k,o[k]);
-         return false;
-        });
-        return d;
-       };
-      };
-     },
-     DecodeStringMap:function(decEl)
-     {
-      return function()
-      {
-       return function(o)
-       {
-        var m;
-        m=[FSharpMap.New1([])];
-        decEl(null);
-        JSModule.ForEach(o,function(k)
-        {
-         m[0]=m[0].Add(k,o[k]);
-         return false;
-        });
-        return m[0];
-       };
-      };
-     },
-     DecodeTuple:function(decs)
-     {
-      return this.EncodeTuple(decs);
-     },
-     DecodeUnion:function(t,discr,cases)
-     {
-      return function()
-      {
-       return function(x)
-       {
-        var _,o,tag,_1,tagName,predicate,r,tuple,x1,action;
-        if(typeof x==="object")
-         {
-          o=t===undefined?{}:new t();
-          if(Unchecked.Equals(typeof discr,"string"))
-           {
-            tagName=x[discr];
-            predicate=function(tupledArg)
-            {
-             var name;
-             name=tupledArg[0];
-             tupledArg[1];
-             return name===tagName;
-            };
-            _1=Arrays.findINdex(predicate,cases);
-           }
-          else
-           {
-            r=[undefined];
-            JSModule.ForEach(discr,function(k)
-            {
-             var _2;
-             if(x.hasOwnProperty(k))
-              {
-               r[0]=discr[k];
-               _2=true;
-              }
-             else
-              {
-               _2=false;
-              }
-             return _2;
-            });
-            _1=r[0];
-           }
-          tag=_1;
-          o.$=tag;
-          tuple=Arrays.get(cases,tag);
-          x1=tuple[1];
-          action=function(tupledArg)
-          {
-           var from,to,dec,kind;
-           from=tupledArg[0];
-           to=tupledArg[1];
-           dec=tupledArg[2];
-           kind=tupledArg[3];
-           return from===null?void(o.$0=(dec(null))(x)):Unchecked.Equals(kind,0)?void(o[from]=(dec(null))(x[to])):Unchecked.Equals(kind,1)?void(o[from]=x.hasOwnProperty(to)?{
-            $:1,
-            $0:(dec(null))(x[to])
-           }:{
-            $:0
-           }):Operators.FailWith("Invalid field option kind");
-          };
-          Arrays.iter(action,x1);
-          _=o;
-         }
-        else
-         {
-          _=x;
-         }
-        return _;
-       };
-      };
-     },
-     EncodeArray:function(encEl)
-     {
-      return function()
-      {
-       return function(a)
-       {
-        var encEl1;
-        encEl1=encEl(null);
-        return Arrays.map(encEl1,a);
-       };
-      };
-     },
-     EncodeDateTime:function()
-     {
-      return function()
-      {
-       return function(x)
-       {
-        return(new Date(x)).toISOString();
-       };
-      };
-     },
-     EncodeList:function(encEl)
-     {
-      return function()
-      {
-       return function(l)
-       {
-        var a,encEl1,action;
-        a=[];
-        encEl1=encEl(null);
-        action=function(x)
-        {
-         var value;
-         value=a.push(encEl1(x));
-         return;
-        };
-        Seq.iter(action,l);
-        return a;
-       };
-      };
-     },
-     EncodeRecord:function(_arg1,fields)
-     {
-      return function()
-      {
-       return function(x)
-       {
-        var o,action;
-        o={};
-        action=function(tupledArg)
-        {
-         var name,enc,kind,_,matchValue,_1,x1;
-         name=tupledArg[0];
-         enc=tupledArg[1];
-         kind=tupledArg[2];
-         if(Unchecked.Equals(kind,0))
-          {
-           _=void(o[name]=(enc(null))(x[name]));
-          }
-         else
-          {
-           if(Unchecked.Equals(kind,1))
-            {
-             matchValue=x[name];
-             if(matchValue.$==0)
-              {
-               _1=null;
-              }
-             else
-              {
-               x1=matchValue.$0;
-               _1=void(o[name]=(enc(null))(x1));
-              }
-             _=_1;
-            }
-           else
-            {
-             _=Unchecked.Equals(kind,2)?x.hasOwnProperty(name)?void(o[name]=(enc(null))(x[name])):null:Operators.FailWith("Invalid field option kind");
-            }
-          }
-         return _;
-        };
-        Arrays.iter(action,fields);
-        return o;
-       };
-      };
-     },
-     EncodeSet:function(encEl)
-     {
-      return function()
-      {
-       return function(s)
-       {
-        var a,encEl1,action;
-        a=[];
-        encEl1=encEl(null);
-        action=function(x)
-        {
-         var value;
-         value=a.push(encEl1(x));
-         return;
-        };
-        Seq.iter(action,s);
-        return a;
-       };
-      };
-     },
-     EncodeStringDictionary:function(encEl)
-     {
-      return function()
-      {
-       return function(d)
-       {
-        var o,encEl1,enumerator,_,forLoopVar,activePatternResult,v,k;
-        o={};
-        encEl1=encEl(null);
-        enumerator=Enumerator.Get(d);
-        try
-        {
-         while(enumerator.MoveNext())
-          {
-           forLoopVar=enumerator.get_Current();
-           activePatternResult=Operators.KeyValue(forLoopVar);
-           v=activePatternResult[1];
-           k=activePatternResult[0];
-           o[k]=encEl1(v);
-          }
-        }
-        finally
-        {
-         enumerator.Dispose!=undefined?enumerator.Dispose():null;
-        }
-        return o;
-       };
-      };
-     },
-     EncodeStringMap:function(encEl)
-     {
-      return function()
-      {
-       return function(m)
-       {
-        var o,encEl1,action;
-        o={};
-        encEl1=encEl(null);
-        action=function(k)
-        {
-         return function(v)
-         {
-          o[k]=encEl1(v);
-         };
-        };
-        MapModule.Iterate(action,m);
-        return o;
-       };
-      };
-     },
-     EncodeTuple:function(encs)
-     {
-      return function()
-      {
-       return function(args)
-       {
-        return Arrays.map2(function(f)
-        {
-         return function(x)
-         {
-          return(f(null))(x);
-         };
-        },encs,args);
-       };
-      };
-     },
-     EncodeUnion:function(_arg2,discr,cases)
-     {
-      return function()
-      {
-       return function(x)
-       {
-        var _,o,tag,patternInput,tagName,fields,action;
-        if(typeof x==="object")
-         {
-          o={};
-          tag=x.$;
-          patternInput=Arrays.get(cases,tag);
-          tagName=patternInput[0];
-          fields=patternInput[1];
-          Unchecked.Equals(typeof discr,"string")?void(o[discr]=tagName):null;
-          action=function(tupledArg)
-          {
-           var from,to,enc,kind,_1,record,_2,matchValue,_3,x1;
-           from=tupledArg[0];
-           to=tupledArg[1];
-           enc=tupledArg[2];
-           kind=tupledArg[3];
-           if(from===null)
-            {
-             record=(enc(null))(x.$0);
-             _1=JSModule.ForEach(record,function(f)
-             {
-              o[f]=record[f];
-              return false;
-             });
-            }
-           else
-            {
-             if(Unchecked.Equals(kind,0))
-              {
-               _2=void(o[to]=(enc(null))(x[from]));
-              }
-             else
-              {
-               if(Unchecked.Equals(kind,1))
-                {
-                 matchValue=x[from];
-                 if(matchValue.$==0)
-                  {
-                   _3=null;
-                  }
-                 else
-                  {
-                   x1=matchValue.$0;
-                   _3=void(o[to]=(enc(null))(x1));
-                  }
-                 _2=_3;
-                }
-               else
-                {
-                 _2=Operators.FailWith("Invalid field option kind");
-                }
-              }
-             _1=_2;
-            }
-           return _1;
-          };
-          Arrays.iter(action,fields);
-          _=o;
-         }
-        else
-         {
-          _=x;
-         }
-        return _;
-       };
-      };
+      var forLoopVar,activePatternResult10067;
+      forLoopVar=enumerator.Current();
+      activePatternResult10067=Operators.KeyValue(forLoopVar);
+      o[activePatternResult10067[0]]=e(activePatternResult10067[1]);
      }
-    },{
-     Id:function()
-     {
-      return function(x)
-      {
-       return x;
-      };
-     },
-     New:function()
-     {
-      return Runtime.New(this,{});
-     },
-     get_Default:function()
-     {
-      return Internals.Provider();
-     }
-    })
-   },
-   Web:{
-    InlineControl:Runtime.Class({
-     get_Body:function()
-     {
-      var f;
-      f=Arrays.fold(function(obj)
-      {
-       return function(field)
-       {
-        return obj[field];
-       };
-      },window,this.funcName);
-      return f.apply(null,this.args);
-     }
-    })
    }
+   finally
+   {
+    "Dispose"in enumerator?enumerator.Dispose():null;
+   }
+   return o;
+  });
+ };
+ Provider.EncodeStringMap=function(encEl)
+ {
+  return Runtime.Curried2(function(unitVar0,m)
+  {
+   var o,e,action;
+   o={};
+   e=encEl();
+   (action=Runtime.Curried2(function(k,v)
+   {
+    o[k]=e(v);
+   }),function(table)
+   {
+    Map.Iterate(action,table);
+   })(m);
+   return o;
+  });
+ };
+ Provider.EncodeSet=function(encEl)
+ {
+  return Runtime.Curried2(function(unitVar0,s)
+  {
+   var a,e,action;
+   a=[];
+   e=encEl();
+   (action=function(x)
+   {
+    a.push(e(x));
+   },function(set)
+   {
+    Seq.iter(action,set);
+   })(s);
+   return a;
+  });
+ };
+ Provider.EncodeArray=function(encEl)
+ {
+  return Runtime.Curried2(function(unitVar0,a)
+  {
+   var e;
+   e=encEl();
+   return Arrays.map(e,a);
+  });
+ };
+ Provider.EncodeUnion=function($1,discr,cases)
+ {
+  return Runtime.Curried2(function(unitVar0,x)
+  {
+   var o,tag,patternInput,action;
+   return typeof x==="object"?(o={},tag=x.$,patternInput=Arrays.get(cases,tag),Unchecked.Equals(typeof discr,"string")?void(o[discr]=patternInput[0]):null,(action=function(a)
+   {
+    var from,to,enc,kind,record,matchValue;
+    from=a[0];
+    to=a[1];
+    enc=a[2];
+    kind=a[3];
+    from===null?(record=(enc(null))(x.$0),JSModule.ForEach(record,function(f)
+    {
+     o[f]=record[f];
+     return false;
+    })):Unchecked.Equals(kind,0)?void(o[to]=(enc(null))(x[from])):Unchecked.Equals(kind,1)?(matchValue=x[from],matchValue==null?null:void(o[to]=(enc(null))(matchValue.$0))):Operators.FailWith("Invalid field option kind");
+   },function(array)
+   {
+    Arrays.iter(action,array);
+   })(patternInput[1]),o):x;
+  });
+ };
+ Provider.EncodeRecord=function($1,fields)
+ {
+  return Runtime.Curried2(function(unitVar0,x)
+  {
+   var o,action;
+   o={};
+   (action=function(a)
+   {
+    var name,enc,kind,matchValue;
+    name=a[0];
+    enc=a[1];
+    kind=a[2];
+    Unchecked.Equals(kind,0)?void(o[name]=(enc(null))(x[name])):Unchecked.Equals(kind,1)?(matchValue=x[name],matchValue==null?null:void(o[name]=(enc(null))(matchValue.$0))):Unchecked.Equals(kind,2)?x.hasOwnProperty(name)?void(o[name]=(enc(null))(x[name])):null:Operators.FailWith("Invalid field option kind");
+   },function(array)
+   {
+    Arrays.iter(action,array);
+   })(fields);
+   return o;
+  });
+ };
+ Provider.EncodeList=function(encEl)
+ {
+  return Runtime.Curried2(function(unitVar0,l)
+  {
+   var a,e,action;
+   a=[];
+   e=encEl();
+   (action=function(x)
+   {
+    a.push(e(x));
+   },function(list)
+   {
+    List.iter(action,list);
+   })(l);
+   return a;
+  });
+ };
+ Provider.EncodeDateTime=function()
+ {
+  return Runtime.Curried2(function(unitVar0,x)
+  {
+   return(new Global.Date(x)).toISOString();
+  });
+ };
+ Provider.EncodeTuple=function(encs)
+ {
+  return Runtime.Curried2(function(unitVar0,args)
+  {
+   return Arrays.map2(Runtime.Curried2(function(f,x)
+   {
+    return(f(null))(x);
+   }),encs,args);
+  });
+ };
+ Provider.Id=function()
+ {
+  return Runtime.Curried2(function(unitVar0,x)
+  {
+   return x;
+  });
+ };
+ Control=Web.Control=Runtime.Class({
+  Body:function()
+  {
+   return this.get_Body();
   }
- });
- Runtime.OnInit(function()
- {
-  Json=Runtime.Safe(Global.WebSharper.Json);
-  Provider=Runtime.Safe(Json.Provider);
-  Date=Runtime.Safe(Global.Date);
-  List=Runtime.Safe(Global.WebSharper.List);
-  Arrays=Runtime.Safe(Global.WebSharper.Arrays);
-  Unchecked=Runtime.Safe(Global.WebSharper.Unchecked);
-  Operators=Runtime.Safe(Global.WebSharper.Operators);
-  Collections=Runtime.Safe(Global.WebSharper.Collections);
-  FSharpSet=Runtime.Safe(Collections.FSharpSet);
-  BalancedTree=Runtime.Safe(Collections.BalancedTree);
-  Dictionary=Runtime.Safe(Collections.Dictionary);
-  JavaScript=Runtime.Safe(Global.WebSharper.JavaScript);
-  JSModule=Runtime.Safe(JavaScript.JSModule);
-  FSharpMap=Runtime.Safe(Collections.FSharpMap);
-  Seq=Runtime.Safe(Global.WebSharper.Seq);
-  Enumerator=Runtime.Safe(Global.WebSharper.Enumerator);
-  MapModule=Runtime.Safe(Collections.MapModule);
-  Internals=Runtime.Safe(Json.Internals);
-  return window=Runtime.Safe(Global.window);
- });
- Runtime.OnLoad(function()
- {
-  Internals.Provider();
-  return;
- });
+ },null,Control);
+ FSharpInlineControl=Web.FSharpInlineControl=Runtime.Class({
+  get_Body:function()
+  {
+   return Arrays.fold(Runtime.Curried2(function(obj,field)
+   {
+    return obj[field];
+   }),Global.window,this.funcName).apply(null,this.args);
+  }
+ },Control,FSharpInlineControl);
+ InlineControl=Web.InlineControl=Runtime.Class({
+  get_Body:function()
+  {
+   return Arrays.fold(Runtime.Curried2(function(obj,field)
+   {
+    return obj[field];
+   }),Global.window,this.funcName).apply(null,this.args);
+  }
+ },Control,InlineControl);
 }());
