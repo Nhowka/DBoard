@@ -1,1 +1,1 @@
-web: mono ./DBoard/obj/Debug/DBoard.exe
+web: ls ; ls -R ; find
