@@ -7,7 +7,8 @@
     <ProjectGuid>{757e5388-e429-4267-9ec1-75e95302a455}</ProjectGuid>
     <WebSharperProject>Site</WebSharperProject>
     <TargetFSharpCoreVersion>4.3.1.0</TargetFSharpCoreVersion>
-    <TargetFrameworkProfile />
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -29,7 +30,7 @@
     <Name>DBoard</Name>
     <RootNamespace>DBoard</RootNamespace>
     <AssemblyName>DBoard</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
